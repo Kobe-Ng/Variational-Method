@@ -1,5 +1,4 @@
 import numpy as np
-from sympy import *
 import matplotlib.pyplot as plt
 
 # The test function will have E=C_0*h*w. We only calculate C_0 and multiple hw after. 
@@ -20,7 +19,7 @@ def psi_test2(x):
     return 0.5+0.5*np.tanh(1000*(x+(20/3)**.5)) - (0.5+0.5*np.tanh(1000*(x-(20/3)**.5)))
 
 
-# normalizes a square integrable function.
+# Normalizes a square integrable function.
 def normalize(psi):
     inner_product = np.trapz(psi * np.conj(psi), xfine)
     return 1 / (inner_product)**(0.5) * psi
@@ -51,7 +50,7 @@ def energy_expectation_value(psi, V, xfine):
 def potential(x):
     return -((x**2.0) / 2.0) + ((x**4.0) / 16.0)
 
-
-V = potential
-psi = psi_test2
-print(energy_expectation_value(psi, V, xfine))
+if __name__ == "__main__":
+    V = potential
+    psi = psi_test2
+    print(energy_expectation_value(psi, V, xfine))
