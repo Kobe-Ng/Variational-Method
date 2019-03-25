@@ -30,9 +30,21 @@ an = np.array([1, 1, 0, -1 / 3.0, 0, 1 / 5.0, 0, -
                1 / 7.0, 0, 1 / 9.0, 0, -1 / 11.0, 0, 1 / 13.0])
 
 
-y = cos_series(an, xfine, L)
-print(xfine.size)
-print(y.size)
+# This function is an envelope that
+# approximates a box function centred at 0 with length 2L.
+# As k->inf, the approximation becomes exact.
+# k = 1000 is a bit of a placeholder.
+def generate_envelope_function(L, x, k=1000):
+    return (0.5+0.5*np.tanh(k*(x+L))) - (0.5+0.5*np.tanh(k*(x-L)))
+
+
+# Generates a wavefunction.
+# The wave function is guaranteed not
+# to diverge at infinity due to the envelope
+def generate_psi(cn, x, L, k = 1000):
+    return exponential_series(cn, x, L) * generate_envelope_function(L, x, k)
+
+y = generate_psi(an, xfine, L)
 plt.plot(xfine, y)
 plt.axis([-12, 12, -5, 5])
 plt.show()

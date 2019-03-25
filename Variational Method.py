@@ -1,7 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
-# The test function will have E=C_0*h*w. We only calculate C_0 and multiple hw after. 
+# The test function will have E=C_0*h*w. We only calculate C_0 and multiple hw after.
 h_bar = 1.0
 m = 1.0
 w = 1.0
@@ -11,8 +10,12 @@ xfine = np.linspace(-10, 10, 2000)
 a = 0.336796
 
 
+def potential(x):
+    return -((x**2.0) / 2.0) + ((x**4.0) / 16.0)
+
+
 def psi_test(x):
-    return exp(-a*x**2.0/2.0)
+    return np.exp(-a*x**2.0/2.0)
 
 
 def psi_test2(x):
@@ -46,9 +49,6 @@ def energy_expectation_value(psi, V, xfine):
 
     return kinetic_energy + potential_energy
 
-
-def potential(x):
-    return -((x**2.0) / 2.0) + ((x**4.0) / 16.0)
 
 if __name__ == "__main__":
     V = potential
